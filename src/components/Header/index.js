@@ -4,8 +4,11 @@ import "./index.scss";
 
 export default function Header(props) {
 
-  const {setIsInputShow, isInputShow} = props;
+  const { setIsInputShow, isInputShow } = props;
 
+  /**
+   * @description: Change isInputShow flag to opposite when plus button is triggered
+   */  
   const plusButtonClickHandler = () => {
     setIsInputShow(!isInputShow)
   };

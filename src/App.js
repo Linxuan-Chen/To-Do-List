@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 
 import MyHeader from "./components/Header";
@@ -7,25 +7,63 @@ import MyList from './components/ToDoList'
 
 
 function App() {
+  // state to store task info
   const [toDoList, setToDoList] = useState([]);
+
+  // state to decide if the input box is shown
   const [isInputShow, setIsInputShow] = useState(false);
-  const addList = (value) => {
-    if(value === "") {
-      return
-    } else {
-      let item = {
-        task: value,
-        isComplete: false,
-        id: Math.floor(Math.random()*10000000)
+
+  /**
+   * @description: Add tasks to toDoList state, task obj is composed by content, isComplete flag and timestamp
+   * @param {String} value task contents 
+   */
+  const addList =
+    (value) => {
+      if (value === "") {
+        return;
+      } else {
+        let item = {
+          task: value,
+          isComplete: false,
+          timestamp: new Date().getTime(),
+          completeTimestamp: null
+        }
+        setToDoList([item, ...toDoList]);
       }
-      setToDoList([item, ...toDoList]);
     }
-  }
+  /**
+   * @description: Get to-do-list data stored in local storage
+   */
+  useEffect(
+    () => {
+      const toDoData = JSON.parse(localStorage.getItem('toDoData') || '[]');
+      setToDoList(toDoData)
+    }, []
+  )
+  /**
+   * @description: Store to-do-list data to local storage
+   */
+  useEffect(
+    () => {
+      localStorage.setItem('toDoData', JSON.stringify(toDoList))
+    }, [toDoList]
+  )
+
+
+
   return (
     <div className="App">
+      {/* Header starts */}
       <MyHeader setIsInputShow={setIsInputShow} isInputShow={isInputShow} />
-      {isInputShow ? <MyInput addList={addList} setIsInputShow={setIsInputShow}/> : ""}
+      {/* Header ends */}
+
+      {/* Show input box when plus button is triggered */}
+      {isInputShow ? <MyInput addList={addList} setIsInputShow={setIsInputShow} /> : ""}
+      {/* input box ends */}
+
+      {/* To do list starts */}
       <MyList toDoList={toDoList} setToDoList={setToDoList} />
+      {/* To do list ends */}
     </div>
   );
 }

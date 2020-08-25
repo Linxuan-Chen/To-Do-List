@@ -62,7 +62,7 @@ export default function ToDoItems(props) {
   return (
     <li className="row shadow-sm mt-2">
       {/* checkbox starts */}
-      <div className="col-2 pt-2">
+      <div className="col-2 col-lg-2 pt-3">
         <input
           type="checkbox"
           name="isComplete"
@@ -74,7 +74,7 @@ export default function ToDoItems(props) {
       {/* checkbox ends */}
 
       {/* task content starts */}
-      <div className="col-6 text-center pt-2 text-truncate">
+      <div className="col-10 col-lg-6 text-center pt-3 text-truncate">
         <span
           style={{
             textDecoration: task.isComplete ? "line-through" : "none",
@@ -85,7 +85,7 @@ export default function ToDoItems(props) {
       </div>
       {/* task content ends */}
 
-      <div className="col text-right pr-0">
+      <div className="col-12 col-lg-4 text-right pr-0 pb-2 pt-2">
         {/* checkModal starts */}
         <div className="btn-group" role="group" aria-label="Basic example">
           <button

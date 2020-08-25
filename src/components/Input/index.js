@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 
 import "./index.scss";
@@ -16,7 +15,7 @@ export default function Input(props) {
 
   /**
    * @description: Run when add button is clicked
-   */  
+   */
   const addButtonClickHandler = () => {
     // Pass inputValue to addList method in App
     addList(inputValue);
@@ -35,7 +34,7 @@ export default function Input(props) {
             <input
               type="text"
               className="plus-input"
-              placeholder="Please input the task you want to add"
+              placeholder="Please enter a task"
               value={inputValue}
               onChange={inputChangeHandler}
             />
